@@ -12,7 +12,7 @@ namespace Service
         bool Add(Product model);
         bool Update(Product model);
         bool Delete(int id);
-        IEnumerable<Product> GetAll(Product model);
+        IEnumerable<Product> GetAll();
 
 
     }
@@ -23,7 +23,7 @@ namespace Service
         public ProductService(ProductDbContext productDbcontext)
         {
 
-            productDbcontext = _productDbContext;
+            _productDbContext = productDbcontext;
 
         }
 
@@ -94,7 +94,7 @@ namespace Service
         }
 
 
-        public IEnumerable<Product> GetAll(Product model)
+        public IEnumerable<Product> GetAll()
         {
 
             var result = new List<Product>();
@@ -110,7 +110,7 @@ namespace Service
 
             }
 
-            return result
+            return result;
         }
 
 
