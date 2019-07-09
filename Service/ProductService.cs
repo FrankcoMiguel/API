@@ -13,6 +13,8 @@ namespace Service
         bool Update(Product model);
         bool Delete(int id);
         IEnumerable<Product> GetAll();
+        Product Get(int id);
+
 
 
     }
@@ -103,6 +105,25 @@ namespace Service
             {
 
                 result = _productDbContext.Product.ToList();
+
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
+
+        public Product Get(int id)
+        {
+
+            var result = new Product();
+
+            try
+            {
+
+                result = _productDbContext.Product.Single(x => x.ProductID == id);
 
             }
             catch (System.Exception)

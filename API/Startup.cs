@@ -32,7 +32,6 @@ namespace API
             var connection = Configuration.GetConnectionString("Dev");
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddTransient<IProductService, ProductService>();
         }
 
