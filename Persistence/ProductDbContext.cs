@@ -9,5 +9,8 @@ namespace Persistence
    public class ProductDbContext : DbContext
     {
         public DbSet<Product> Product { get; set; }
+
+        public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options) { }
+
     }
 }
