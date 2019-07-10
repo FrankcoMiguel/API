@@ -8,9 +8,9 @@ using Model;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : Controller
     {
         private readonly IProductService _productService;
 
