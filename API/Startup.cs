@@ -11,8 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Persistence;
 using Service;
+
 
 namespace API
 {
@@ -33,11 +35,46 @@ namespace API
             services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IProductService, ProductService>();
+
+            services.AddCors(options =>
+            {
+
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+
+                    builder.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin()
+
+                    );
+
+
+            });
+
+            services.AddSwaggerGen(c =>
+
+            {
+
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API", Version = "v1" });
+
+            });
+
+
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API V1");
+
+            });
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
