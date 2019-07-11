@@ -55,7 +55,7 @@ namespace Service
 
             try
             {
-
+               
                 var originalModel = _productDbContext.Product.Single(x => x.ProductID == model.ProductID);
 
                 originalModel.Name = model.Name;

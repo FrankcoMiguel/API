@@ -49,7 +49,7 @@ namespace API.Controllers
         public IActionResult Put([FromBody] Product model)
         {
 
-            return Ok(_productService.Add(model));
+            return Ok(_productService.Update(model));
 
         }
 
